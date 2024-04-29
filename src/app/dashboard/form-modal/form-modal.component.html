@@ -1,0 +1,66 @@
+<!-- Employee page form for both edit and Add -->
+<div class="modal-header">
+
+    <!-- dynamic Modal Title -->
+    <h4 class="modal-title" id="modal-title">{{isEditForm? "Edit" : 'Add'}} Employee</h4>
+    <button mat-icon-button (click)="closeModal()">
+        <mat-icon>close</mat-icon>
+    </button>
+</div>
+
+<div id="form-Modal" class="modal-body">
+
+    <!-- Employee form to get data -->
+    <form [formGroup]="employeeForm">
+        <div class="mb-3">
+            <label for="exampleInputName" class="form-label">Name</label>
+            <input type="text" formControlName="name" placeholder="Name"
+                [ngClass]=" employeeForm.controls['name'].touched && employeeForm.controls['name'].errors?.['required'] ?'invalid-field':''"
+                class="form-control" id="exampleInputName">
+
+            <!-- Error Message -->
+            <div class="form-text"
+                [ngClass]="employeeForm.controls['name'].touched && employeeForm.controls['name'].errors?.['required'] ?'invalid-input':'valid-input'">
+                Name is required!</div>
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputSalary" class="form-label">Salary</label>
+            <input type="number" formControlName="salary" placeholder="Salary"
+                [ngClass]="employeeForm.controls['salary'].touched && employeeForm.controls['salary'].errors?.['required'] ?'invalid-field':''"
+                class="form-control" id="exampleInputSalary">
+
+            <!-- Error Message -->
+            <div class="form-text"
+                [ngClass]="employeeForm.controls['salary'].touched && employeeForm.controls['salary'].errors?.['required']?'invalid-input':'valid-input'">
+                Salary is required!
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputDeductions" class="form-label">Deductions</label>
+            <input type="number" formControlName="deductions" placeholder="Deductions"
+                [ngClass]="employeeForm.controls['deductions'].touched && employeeForm.controls['deductions'].errors?.['required'] ?'invalid-field':''"
+                class="form-control" id="exampleInputDeductions">
+
+            <!-- Error Message -->
+            <div class="form-text"
+                [ngClass]="employeeForm.controls['deductions'].touched && employeeForm.controls['deductions'].errors?.['required'] ?'invalid-input':'valid-input'">
+                Deductions is required!</div>
+        </div>
+    </form>
+</div>
+<!-- Modal Actions -->
+
+<div class="modal-footer">
+    <button type="button" mat-raised-button (click)="closeModal()" class="btn btn-secondary"
+        data-bs-dismiss="modal">
+        <mat-icon>close</mat-icon>
+        Close
+    </button>
+    
+    <!-- Dynamic Button Name -->
+    <button [disabled]="!employeeForm.valid" type="button" mat-raised-button color="primary" (click)="hadleEvent()"
+        data-bs-dismiss="modal" class="btn btn-primary">
+        <mat-icon *ngIf="!isEditForm">add</mat-icon>
+        <mat-icon *ngIf="isEditForm">edit</mat-icon>
+        {{isEditForm? "Edit" : 'Add'}}</button>
+</div>

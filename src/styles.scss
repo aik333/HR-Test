@@ -1,0 +1,26 @@
+// regular style toast
+@import 'ngx-toastr/toastr';
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+
+/* You can add global styles to this file, and also import other style files */
+body {
+    margin: unset;
+    height: 100vh;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.mat-mdc-paginator-container {
+    flex-wrap: unset !important;
+}
+/* Importing Bootstrap SCSS file. */
+@import 'bootstrap/scss/bootstrap';

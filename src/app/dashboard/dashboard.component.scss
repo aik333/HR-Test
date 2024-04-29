@@ -1,0 +1,34 @@
+#main-dashboard {
+  h1 {
+    text-align: center;
+    margin: 16px 0px;
+  }
+
+  .add-data {
+    margin: 10px;
+    float: right;
+  }
+
+  .table-row {
+    padding: 0px 10px;
+    table {
+      box-shadow: unset;
+      th {
+        white-space: nowrap;
+      }
+
+      td {
+        max-width: 100px !important;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .table-actions {
+    display: none;
+  }
+}

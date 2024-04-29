@@ -1,0 +1,87 @@
+<!-- Auth Component Start -->
+<div id="main_auth" class="row main-auth">
+    <div class="col col-md-10 h-80 centered-content">
+        <div class="col col-md-6 left-image">
+            <img *ngIf="isSignUp" src="../../assets/images/signup-image.jpg" alt=""> <!-- Signup page Image-->
+            <img *ngIf="!isSignUp" src="../../assets/images/signin-image.jpg" alt=""> <!-- Login page Image-->
+        </div>
+        <div class="col col-md-4 right-form">
+
+            <!-- Dyamic Form Name -->
+            <h2>{{isSignUp ? 'Signup' : 'Login'}} Form</h2>
+
+            <!-- Conditional Welcome Message -->
+            <h4 *ngIf="!isSignUp">Welcome Back!</h4>
+
+            <!-- Signle form for both Login and Signup -->
+            <form [formGroup]="authForm">
+
+                <!-- Consitional Input filed -->
+
+                <div *ngIf="isSignUp" class="mb-3">
+                    <label for="exampleInputName" class="form-label">Name</label>
+                    <input type="text" formControlName="name" placeholder="Name"
+                        [ngClass]=" submitClicked && authForm.controls['name'].errors?.['required'] ?'invalid-field':''"
+                        class="form-control" id="exampleInputName" aria-describedby="emailHelp">
+
+                    <!-- error message -->
+                    <div class="form-text"
+                        [ngClass]="submitClicked && authForm.controls['name'].errors?.['required'] ?'invalid-input':'valid-input'">
+                        Name is required!</div>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Email</label>
+                    <input type="email" formControlName="email" placeholder="example@example.com"
+                        [ngClass]="submitClicked && (authForm.controls['email'].errors?.['required'] || authForm.controls['email'].errors?.['email']) ?'invalid-field':''"
+                        class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+
+                    <!-- error message -->
+                    <div class="form-text"
+                        [ngClass]="submitClicked && (authForm.controls['email'].errors?.['required'] || authForm.controls['email'].errors?.['email'] )?'invalid-input':'valid-input'">
+                        {{authForm.controls['email'].errors?.['required'] ? 'Email is required!':'Invalid Email!'}}
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Password</label>
+                    <input type="password" formControlName="password" placeholder="password"
+                        [ngClass]="submitClicked && authForm.controls['password'].errors?.['required'] ?'invalid-field':''"
+                        class="form-control" id="exampleInputPassword1">
+
+                    <!-- error messages -->
+                    <div class="form-text"
+                        [ngClass]="submitClicked && authForm.controls['password'].errors?.['required'] ?'invalid-input':'valid-input'">
+                        Password is required!</div>
+                    <div class="form-text"
+                        [ngClass]="authForm.controls['password'].errors?.['minlength'] ?'invalid-input':'valid-input'">
+                        Password must be at least {{ minPasswordLength }} characters long.</div>
+                </div>
+
+                <!-- Consitional Input filed for Confirm Password -->
+                <div class="mb-3" *ngIf="isSignUp">
+                    <label for="confirmPassword" class="form-label">Confirm Password</label>
+                    <input type="password" formControlName="confirmPassword" id="confirmPassword"
+                        [ngClass]="submitClicked && authForm.controls['confirmPassword'].errors?.['required'] ?'invalid-field':''"
+                        class="form-control" placeholder="Retype password">
+
+                    <!-- error messages -->
+                    <div class="form-text"
+                        [ngClass]="submitClicked && authForm.controls['confirmPassword'].errors?.['required'] ?'invalid-input':'valid-input'">
+                        Confirm password is required!</div>
+                    <div class="form-text"
+                        [ngClass]="submitClicked && authForm.errors?.['passwordMismatch']?'invalid-input':'valid-input'">
+                        Passwords do not match!</div>
+                </div>
+
+                <!-- Dynnamic Button Name -->
+                <button mat-raised-button color="primary" type="submit" (click)="onSubmit()" class="btn btn-primary">
+                    <mat-icon *ngIf="!isSignUp">lock</mat-icon>
+                    <mat-icon *ngIf="isSignUp">person_add</mat-icon>
+                    {{isSignUp ? 'Signup' :
+                    'Login'}}</button>
+
+                <!-- Dynnamic Name for auth mode switch -->
+                <span (click)="authModeSwitch()">{{isSignUp ? 'Already have' : 'Create'}} an account?</span>
+            </form>
+        </div>
+    </div>
+</div>

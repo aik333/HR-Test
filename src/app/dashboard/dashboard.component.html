@@ -1,0 +1,69 @@
+<div id="main-dashboard">
+  <h1>Employees Page</h1>
+  <div class="add-data">
+    <button mat-raised-button color="primary" (click)="editEmployee(true)"> <mat-icon>add</mat-icon>Add
+      Employee</button>
+  </div>
+  <div class="table-row">
+    <table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)"
+      class="mat-elevation-z8">
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by name">
+          Name
+        </th>
+        <td mat-cell *matCellDef="let element"> {{element?.name}} </td>
+      </ng-container>
+
+      <!-- Salary Column -->
+      <ng-container matColumnDef="salary">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by salary">
+          Salary
+        </th>
+        <td mat-cell *matCellDef="let element"> {{element?.salary}} </td>
+      </ng-container>
+
+      <!-- Deductions Column -->
+      <ng-container matColumnDef="deductions">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by deductions">
+          Deductions
+        </th>
+        <td mat-cell *matCellDef="let element"> {{element?.deductions}} </td>
+      </ng-container>
+
+      <!-- Net Salary Column -->
+      <ng-container matColumnDef="netSalary">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by net salary">
+          Net Salary
+        </th>
+        <td mat-cell *matCellDef="let element"> {{element?.netSalary}} </td>
+      </ng-container>
+
+      <!-- Actions Column -->
+      <ng-container matColumnDef="actions">
+        <th class="table-actions" mat-header-cell *matHeaderCellDef> Actions </th>
+        <td class="table-actions" mat-cell *matCellDef="let element; let i = index">
+          <button mat-icon-button color="primary" aria-label="Example icon button with a home icon"
+            (click)="editEmployee(false,i)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" aria-label="Example icon button with a heart icon"
+            (click)="deleteEmployee(i)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <!-- Data Display -->
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    </table>
+
+    <!-- Paginator for Pagination -->
+    <mat-paginator *ngIf="dataSource.data.length !== 0" [pageSizeOptions]="[5, 10, 20]"
+      [showFirstLastButtons]="isMobile()" aria-label="Select page of periodic elements">
+    </mat-paginator>
+  </div>
+</div>

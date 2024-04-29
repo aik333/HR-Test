@@ -1,0 +1,29 @@
+.modal-header{
+    justify-content: space-between;
+}
+#form-Modal {
+    form {
+        display: flex;
+        flex-direction: column;
+
+        .invalid-field {
+            background-color: #ffeaea !important;
+            border-color: #ea6969 !important;
+            box-shadow: 0 0 0 .25rem rgb(253 13 13 / 25%) !important;
+        }
+
+        .invalid-input {
+            color: #ff6969;
+        }
+
+        .valid-input {
+            display: none;
+        }
+
+        span {
+            width: max-content;
+            color: rgba(var(--bs-link-color-rgb), var(--bs-link-opacity, 1));
+            text-decoration: underline;
+        }
+    }
+}
